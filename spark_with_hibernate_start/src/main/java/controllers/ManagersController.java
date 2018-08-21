@@ -39,11 +39,10 @@ public class ManagersController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 //create
-        post("/managers", (req, res)-> {
+        post("/managers", (req, res) -> {
             String firstName = req.queryParams("firstName");
             String lastName = req.queryParams("lastName");
             int salary = Integer.parseInt(req.queryParams("salary"));
-
             int depId = Integer.parseInt(req.queryParams("department"));
             Department department = DBHelper.find(depId, Department.class);
             int budget = Integer.parseInt(req.queryParams("budget"));
@@ -53,37 +52,48 @@ public class ManagersController {
             return null;
         });
 //show
-        get("/managers/:id", (req, res)-> {
+        get("/managers/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Manager manager = DBHelper.find(Integer.parseInt(req.params(":id")), Manager.class);
-            model.put("manager",manager);
+            model.put("manager", manager);
             model.put("template", "templates/managers/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
 
 //edit
-        get("/managers/:id/edit", (req, res)-> {
+        get("/managers/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Manager manager = DBHelper.find(Integer.parseInt(req.params(":id")), Manager.class);
-            model.put("manager",manager);
+            model.put("manager", manager);
             List<Department> departments = DBHelper.getAll(Department.class);
             model.put("departments", departments);
             model.put("template", "templates/managers/edit.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-    }
 
+//update
 
-
-
-
-
+    post("/managers/:id",(req, res)-> {
+        String firstName = req.queryParams("firstName");
+        String lastName = req.queryParams("lastName");
+        int salary = Integer.parseInt(req.queryParams("salary"));
+        int depId = Integer.parseInt(req.queryParams("department"));
+        Department department = DBHelper.find(depId, Department.class);
+        int budget = Integer.parseInt(req.queryParams("budget"));
+        Manager manager = new Manager(firstName, lastName, salary, department, budget);
+        manager.setId(Integer.parseInt(req.params(":id")));
+        DBHelper.update(manager);
+        res.redirect("/managers/"+req.params(":id"));
+        return null;
+    });
 
 
 //todo: if statement in show.vlt - error 500
 //todo: pre-select drop-down in edit.vlt
+//todo: edit.vtl with number > 100 error500
+}
 }
 
 
