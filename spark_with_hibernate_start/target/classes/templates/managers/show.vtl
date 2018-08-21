@@ -8,6 +8,7 @@ if ($manager != null)
         <th>Salary</th>
         <th>Department</th>
         <th>Budget</th>
+        <th>DB Id</th>
     </tr>
     <tr>
         <td>$manager.getFirstName()</td>
@@ -15,6 +16,10 @@ if ($manager != null)
         <td>$manager.getSalary()</td>
         <td>$manager.getDepartment().getTitle()</td>
         <td>$manager.getBudget()</td>
+        <td>$manager.getId()</td>
     </tr>
 </table>
+<form action="/managers/$manager.getId()/delete" method="post">
+    <input type="submit" value="Delete" class="button">
+</form>
 end

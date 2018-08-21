@@ -8,6 +8,7 @@
         <th>Salary</th>
         <th>Department</th>
         <th>Budget</th>
+        <th>DB Id</th>
     </tr>
 
     #foreach($manager in $managers)
@@ -17,6 +18,7 @@
         <td>$manager.getSalary()</td>
         <td>$manager.getDepartment().getTitle()</td>
         <td>$manager.getBudget()</td>
+        <td>$manager.getId()</td>
     </tr>
     #end
 

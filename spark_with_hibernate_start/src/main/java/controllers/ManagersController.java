@@ -88,6 +88,13 @@ public class ManagersController {
         res.redirect("/managers/"+req.params(":id"));
         return null;
     });
+//destroy/delete
+        post("managers/:id/delete", (req, res) -> {
+            Manager manager = DBHelper.find(Integer.parseInt(req.params(":id")), Manager.class);
+            DBHelper.delete(manager);
+            res.redirect("/managers");
+            return null;
+        });
 
 
 //todo: if statement in show.vlt - error 500
