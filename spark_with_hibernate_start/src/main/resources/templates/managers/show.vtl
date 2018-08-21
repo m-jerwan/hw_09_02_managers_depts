@@ -1,16 +1,14 @@
+<p class="page_header">Managers details</p>
 
-<p class="pag_header">All mangers</p>
-
+if ($manager != null)
 <table>
     <tr>
-        <th>First name</th>
+       <th>First name</th>
         <th>Last name</th>
         <th>Salary</th>
         <th>Department</th>
         <th>Budget</th>
     </tr>
-
-    #foreach($manager in $managers)
     <tr>
         <td>$manager.getFirstName()</td>
         <td>$manager.getLastName()</td>
@@ -18,8 +16,5 @@
         <td>$manager.getDepartment().getTitle()</td>
         <td>$manager.getBudget()</td>
     </tr>
-    #end
-
 </table>
-
-<a href="/managers/new">Add manager</a>
+end

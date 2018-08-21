@@ -1,0 +1,27 @@
+<p class="page_header">Edit manager form</p>
+<p>$manager</p>
+
+<form action="/managers" method="post">
+    <label for="firstName">First Name</label>
+    <input type="text" class="input_box" name="firstName" required="true" id="firstName" value="$manager.getFirstName()">
+
+    <label for="lastName">Last Name</label>
+    <input type="text" class="input_box" name="lastName" required="true" id="lastName" value="$manager.getLastName()">
+
+    <label for="salary">Salary</label>
+    <input class="input_box" name="salary" required="true" id="salary" type="number" min="0" step="1" value="$manager.getSalary()">
+
+
+
+    <label for="department">Select Department:</label>
+    <select name="department" id="department">
+        #foreach ($department in $departments)
+        <option value="$department.getId()"> $department.getTitle() </option>
+        #end
+    </select>
+
+    <label for="budget">Budget</label>
+    <input class="input_box" name="budget" required="true" id="budget" type="number" min="0" step="1" value="$manager.getBudget()">
+
+    <input type="submit" value="Save" class="button">
+</form>

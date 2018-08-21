@@ -52,11 +52,38 @@ public class ManagersController {
             res.redirect("/managers");
             return null;
         });
+//show
+        get("/managers/:id", (req, res)-> {
+            Map<String, Object> model = new HashMap<>();
+            Manager manager = DBHelper.find(Integer.parseInt(req.params(":id")), Manager.class);
+            model.put("manager",manager);
+            model.put("template", "templates/managers/show.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
 
 
-
+//edit
+        get("/managers/:id/edit", (req, res)-> {
+            Map<String, Object> model = new HashMap<>();
+            Manager manager = DBHelper.find(Integer.parseInt(req.params(":id")), Manager.class);
+            model.put("manager",manager);
+            List<Department> departments = DBHelper.getAll(Department.class);
+            model.put("departments", departments);
+            model.put("template", "templates/managers/edit.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
 
     }
+
+
+
+
+
+
+
+
+//todo: if statement in show.vlt - error 500
+//todo: pre-select drop-down in edit.vlt
 }
 
 

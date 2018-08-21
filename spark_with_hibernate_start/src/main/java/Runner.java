@@ -21,5 +21,9 @@ public class Runner {
 
         Engineer found = DBHelper.find(engineer1.getId(), Engineer.class);
         Manager foundManager = DBHelper.findManagerForDept(department1);
+
+        int test= manager.getDepartment().getId();
+        String test1 = manager.getDepartment().getTitle();
     }
+
 }

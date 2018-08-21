@@ -5,7 +5,7 @@ import db.Seeds;
 public class MainCotroller {
 
     public static void main(String[] args) {
-        Seeds.seedData();
+//        Seeds.seedData();
         ManagersController managersController = new ManagersController();
         EmployeesController employeesController = new EmployeesController();
         EngineersController engineersController = new EngineersController();
