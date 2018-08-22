@@ -45,21 +45,22 @@ public class ManagersController {
             int salary = Integer.parseInt(req.queryParams("salary"));
             int depId = Integer.parseInt(req.queryParams("department"));
             Department department = DBHelper.find(depId, Department.class);
-            int budget = Integer.parseInt(req.queryParams("budget"));
+            Double budget = Double.parseDouble(req.queryParams("budget"));
             Manager manager = new Manager(firstName, lastName, salary, department, budget);
             DBHelper.save(manager);
             res.redirect("/managers");
             return null;
         });
 //show
+
         get("/managers/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Manager manager = DBHelper.find(Integer.parseInt(req.params(":id")), Manager.class);
+//     if manager is null, redirect to "Can you use a computer?" page
             model.put("manager", manager);
             model.put("template", "templates/managers/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
-
 
 //edit
         get("/managers/:id/edit", (req, res) -> {
@@ -96,10 +97,8 @@ public class ManagersController {
             return null;
         });
 
-
-//todo: if statement in show.vlt - error 500
-//todo: pre-select drop-down in edit.vlt
-//todo: edit.vtl with number > 100 error500
+        
+//todo: pre-select drop-down in edit.vlt  - use conditional if on dept.id
 }
 }
 
